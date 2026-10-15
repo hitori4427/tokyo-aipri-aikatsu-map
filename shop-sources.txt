@@ -1,0 +1,8 @@
+東京店家與地址座標來源
+
+店家：アイプリ官方店家搜尋 https://aipri.jp/shop/search.html?pref_id=13 ，取得2026-10-14。アイカツ！アンコール官方店家PDF https://dcd.aikatsu.com/encore/pdf/shoplist.pdf ，資料2026-10-08，第6–8頁。各店來源保留於店家連結。清單不是即時庫存資料。
+
+地址：国土地理院ウェブサイトの住所検索結果を加工して作成。https://msearch.gsi.go.jp/address-search/AddressSearch ，使用條款 https://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html （PDL1.0）。
+Geolonia 住所データ（CC BY 4.0）を加工して作成。https://geolonia.github.io/japanese-addresses/ ，授權 https://creativecommons.org/licenses/by/4.0/ 。
+
+address為地址比對點，非已核實店門口；block為街區估算中心；town_chome為町丁目估算中心；shared_address_reference_point為共用地址參考點；operator_store_point為官方店點。原地址與定位用更正址分開保留，更正來源見各店資料。座標及直線距離不能當成步行路線或入口。

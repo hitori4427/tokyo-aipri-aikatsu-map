@@ -1,0 +1,52 @@
+Station data source and license
+
+Primary source: MLIT National Land Numerical Information Railway Data (N02), 2025 edition.
+Dataset date: 2025-12-31. Published/updated: April 2026. Retrieved: 2026-10-14.
+Source page: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N02-2025.html
+Downloaded archive: https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip
+License explicitly stated on source page: CC BY 4.0 for editions from 2020 onward.
+License: https://creativecommons.org/licenses/by/4.0/
+Terms: https://nlftp.mlit.go.jp/ksj/other/agreement_01.html
+Required visible attribution for an application using these coordinates:
+「国土数値情報（鉄道データ）」（国土交通省）を加工して作成。取得日：2026年10月14日。
+Link the dataset title to the source page and CC BY 4.0 to the license. The app is independently produced, not an official MLIT product.
+
+Method
+Each coordinate is calculated from actual downloaded MLIT station geometry. These are not guessed coordinates or text-address geocoding results. Geometry is EPSG:6668/JGD2011, geographic longitude/latitude. A point is a length-weighted centroid of unique station LineString segments, with local longitude scaling. The same process generates coordinatesByLine. These representative station locations are not station exits or pedestrian routing endpoints. Display precision does not establish real-world accuracy.
+
+Coverage
+All 9 Tokyo Metro service lines (including Marunouchi branch), all 4 Toei subway lines and all 30 JR Yamanote service stations. Same-name stations across selected operators/lines are grouped into one selector entry; different-named interchanges stay separate. Complete selected lines extend beyond Tokyo prefecture. No other operators' through-running branches are included.
+
+Membership corrections, verified against official operator sources
+1. JR Yamanote has 30 stations. MLIT physical lines use 山手線, 東北線 and 東海道線 rather than the entire circle as one service. The station list and sequence were checked at https://media.jreast.co.jp/articles/1214 . Coordinates remain derived solely from MLIT.
+2. Fukutoshin has 16 stations. The first five shared-track stations are not separate Fukutoshin geometry records in MLIT. Their Yurakucho-line geometry is used after verifying membership at https://www.tokyometro.jp/station/line_fukutoshin/index.html .
+3. Marunouchi main line and branch are one service line in the selector. Duplicate Nakano-sakaue records are merged.
+Only facts about membership/order are used from operator pages; their prose, maps, logos and photos are not included or relicensed.
+
+Deliverables
+stations_tokyo.json: complete metadata, line definitions, station entries and source IDs.
+stations_tokyo_array.json: same station entries as a compact top-level JSON array for straightforward app import.
+stations_selected_source.geojson: exact selected source geometries and properties for audit.
+stations_mlit_raw.geojson: original nationwide station GeoJSON extracted from the source ZIP.
+N02-25_GML.zip: unmodified original downloaded archive.
+
+Station selector entries: 229
+Line count: 14
+東京メトロ銀座線: 19 stations
+東京メトロ丸ノ内線: 28 stations
+東京メトロ日比谷線: 22 stations
+東京メトロ東西線: 23 stations
+東京メトロ千代田線: 20 stations
+東京メトロ有楽町線: 24 stations
+東京メトロ半蔵門線: 14 stations
+東京メトロ南北線: 19 stations
+東京メトロ副都心線: 16 stations
+都営浅草線: 20 stations
+都営三田線: 27 stations
+都営新宿線: 21 stations
+都営大江戸線: 38 stations
+JR山手線: 30 stations
+
+Archive SHA-256: aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f
+
+2026-10-15 license verification update: the current MLIT website terms effective 2026-03-23 apply PDL1.0 unless otherwise specified. See https://nlftp.mlit.go.jp/ksj/other/agreement.html . The app retains dataset attribution and independently-processed/non-official wording. Prior CC BY metadata is retained above as dataset preparation provenance; current-use terms take precedence. No official transit-map imagery or layout is distributed.
