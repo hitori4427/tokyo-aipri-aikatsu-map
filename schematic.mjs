@@ -6,9 +6,9 @@ export async function drawSchematic(routes,stations,onPick){
  const point=e=>{const {r,scale,px,py}=geometry();return[view[0]+(e.clientX-r.left-px)/scale,view[1]+(e.clientY-r.top-py)/scale];};
  function zoom(f,anchor){view=zoomView(view,f,anchor);apply();}
  svg.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY<0?1.2:1/1.2,point(e));},{passive:false});
- svg.addEventListener('pointerdown',e=>{if(e.button&&e.button!==0)return;moved=false;drag={x:e.clientX,y:e.clientY,v:[...view],scale:geometry().scale};svg.setPointerCapture?.(e.pointerId);});
+ svg.addEventListener('pointerdown',e=>{if(e.button&&e.button!==0)return;moved=false;drag={x:e.clientX,y:e.clientY,v:[...view],scale:geometry().scale};});
  svg.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(Math.hypot(dx,dy)>5)moved=true;if(moved){view=[drag.v[0]-dx/drag.scale,drag.v[1]-dy/drag.scale,...drag.v.slice(2)];apply();}});
- svg.addEventListener('pointerup',()=>{drag=null;});svg.addEventListener('pointercancel',()=>{drag=null;});
+ svg.addEventListener('pointerup',()=>{drag=null;});svg.addEventListener('pointercancel',()=>{drag=null;});svg.addEventListener('pointerleave',()=>{drag=null;});
  for(const g of host.querySelectorAll('[data-station]')){g.addEventListener('click',()=>{if(!moved)onPick(g.dataset.station);});g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onPick(g.dataset.station);}});}
  const selector=document.querySelector('#route-select');selector.innerHTML='<option value="">全網總覽 · 14 線 229 站</option>'+routes.map(r=>`<option value="${r.code}">${r.code} · ${r.name}</option>`).join('');selector.onchange=()=>{const code=selector.value;for(const el of svg.querySelectorAll('[data-line]'))el.classList.toggle('route-dim',!!code&&el.dataset.line!==code);for(const el of svg.querySelectorAll('[data-lines]'))el.classList.toggle('station-dim',!!code&&!el.dataset.lines.split(' ').includes(code));};
  return{zoomIn:()=>zoom(1.5),zoomOut:()=>zoom(1/1.5),reset:()=>{view=[0,0,3200,2500];apply();},focusStation:name=>{const g=[...svg.querySelectorAll('[data-station]')].find(x=>x.dataset.station===name),c=g?.querySelector('circle');if(c){const w=Math.min(view[2],900),h=w*2500/3200;view=[+c.getAttribute('cx')-w/2,+c.getAttribute('cy')-h/2,w,h];apply();}},getView:()=>[...view]};
